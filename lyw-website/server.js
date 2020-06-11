@@ -39,6 +39,14 @@ var server = http.createServer(function (request, response) {
         response.setHeader('Access-Control-Allow-Origin', 'http://llq.com:9000') // 设置 CORS 允许跨域
         response.write(fs.readFileSync('./data.json'))
         response.end()
+    } else if (path === '/data.js') {
+        response.statusCode = 200
+        response.setHeader('Content-Type', 'text/javascript;charset=utf-8')
+        const string = fs.readFileSync('./data.js').toString()
+        const data = fs.readFileSync('./data.json').toString()
+        const string2 = string.replace('nnn', data)
+        response.write(string2)
+        response.end()
     } else {
         response.statusCode = 404
         response.setHeader('Content-Type', 'text/html;charset=utf-8')
