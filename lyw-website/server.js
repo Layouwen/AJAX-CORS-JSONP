@@ -43,9 +43,10 @@ var server = http.createServer(function (request, response) {
         response.statusCode = 200
         response.setHeader('Content-Type', 'text/javascript;charset=utf-8')
         // JSONP
+        // console.log(query.function) 打印接受的参数
         const string = fs.readFileSync('./data.js').toString()
         const data = fs.readFileSync('./data.json').toString()
-        const string2 = string.replace('nnn', data)
+        const string2 = string.replace('nnn', data).replace('bbb', query.callback)
         response.write(string2)
         response.end()
     } else {

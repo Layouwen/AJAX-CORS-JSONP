@@ -9,9 +9,14 @@
 // request.send()
 
 // JSONP
+const random = 'JSONCallbackName' + Math.random()
+console.log(random)
+window[random] = (data) => {
+    console.log(data)
+}
 let script = document.createElement('script')
-script.src = 'http://lyw.com:8000/data.js'
+script.src = `http://lyw.com:8000/data.js?callback=${random}`
 script.onload = () => {
-    console.log(window.xxx)
+    script.remove()
 }
 document.body.appendChild(script)

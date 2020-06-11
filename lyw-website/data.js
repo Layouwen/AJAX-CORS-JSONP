@@ -1,1 +1,1 @@
-window.xxx = nnn
+window['bbb'] = nnn
