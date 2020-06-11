@@ -1,3 +1,4 @@
+// AJAX CORS
 // const request = new XMLHttpRequest()
 // request.open('get', 'http://lyw.com:8000/data.js')
 // request.onreadystatechange = () => {
@@ -7,6 +8,7 @@
 // }
 // request.send()
 
+// JSONP
 let script = document.createElement('script')
 script.src = 'http://lyw.com:8000/data.js'
 script.onload = () => {

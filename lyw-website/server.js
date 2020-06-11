@@ -42,6 +42,7 @@ var server = http.createServer(function (request, response) {
     } else if (path === '/data.js') {
         response.statusCode = 200
         response.setHeader('Content-Type', 'text/javascript;charset=utf-8')
+        // JSONP
         const string = fs.readFileSync('./data.js').toString()
         const data = fs.readFileSync('./data.json').toString()
         const string2 = string.replace('nnn', data)
