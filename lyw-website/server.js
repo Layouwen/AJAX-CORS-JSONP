@@ -40,15 +40,20 @@ var server = http.createServer(function (request, response) {
         response.write(fs.readFileSync('./data.json'))
         response.end()
     } else if (path === '/data.js') {
-        response.statusCode = 200
-        response.setHeader('Content-Type', 'text/javascript;charset=utf-8')
         // JSONP
-        // console.log(query.function) 打印接受的参数
-        const string = fs.readFileSync('./data.js').toString()
-        const data = fs.readFileSync('./data.json').toString()
-        const string2 = string.replace('nnn', data).replace('bbb', query.callback)
-        response.write(string2)
-        response.end()
+        if (request.headers["referer"].indexOf('http://llq.com:9000') === 0) {
+            response.statusCode = 200
+            response.setHeader('Content-Type', 'text/javascript;charset=utf-8')
+            let string = fs.readFileSync('./data.js').toString()
+            let data = fs.readFileSync('./data.json').toString()
+            let string2 = string.replace('nnn', data).replace('bbb', query.callback)
+            // callback('这就是data')
+            response.write(string2)
+            response.end()
+        } else {
+            response.statusCode = 404
+            response.end()
+        }
     } else {
         response.statusCode = 404
         response.setHeader('Content-Type', 'text/html;charset=utf-8')

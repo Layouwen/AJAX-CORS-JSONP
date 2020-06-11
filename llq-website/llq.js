@@ -9,14 +9,23 @@
 // request.send()
 
 // JSONP
-const random = 'JSONCallbackName' + Math.random()
-console.log(random)
-window[random] = (data) => {
+function jsonp(url) {
+    return new Promise((resolve, reject) => {
+        const random = 'JSONCallbackName' + Math.random()
+        window[random] = data => {
+            resolve(data)
+        }
+        const script = document.createElement('script')
+        script.src = `${url}?callback=${random}`
+        script.onload = () => {
+            script.remove()
+        }
+        script.onerror = () => {
+            reject()
+        }
+        document.body.appendChild(script)
+    })
+}
+jsonp('http://lyw.com:8000/data.js').then((data) => {
     console.log(data)
-}
-let script = document.createElement('script')
-script.src = `http://lyw.com:8000/data.js?callback=${random}`
-script.onload = () => {
-    script.remove()
-}
-document.body.appendChild(script)
+})
