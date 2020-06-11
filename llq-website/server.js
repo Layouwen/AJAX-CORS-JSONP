@@ -28,15 +28,10 @@ var server = http.createServer(function (request, response) {
         response.setHeader('Content-Type', 'text/html;charset=utf-8')
         response.write(fs.readFileSync('./index.html'))
         response.end()
-    } else if (path === '/b.js') {
+    } else if (path === '/llq.js') {
         response.statusCode = 200
         response.setHeader('Content-Type', 'text/javascript;charset=utf-8')
-        response.write(fs.readFileSync('./b.js'))
-        response.end()
-    } else if (path === '/b.json') {
-        response.statusCode = 200
-        response.setHeader('Content-Type', 'text/json;charset=utf-8')
-        response.write(fs.readFileSync('./b.json'))
+        response.write(fs.readFileSync('./llq.js'))
         response.end()
     } else {
         response.statusCode = 404

@@ -28,14 +28,15 @@ var server = http.createServer(function (request, response) {
         response.setHeader('Content-Type', 'text/html;charset=utf-8')
         response.write(fs.readFileSync('./index.html'))
         response.end()
-    } else if (path === '/a.js') {
+    } else if (path === '/lyw.js') {
         response.statusCode = 200
         response.setHeader('Content-Type', 'text/javascript;charset=utf-8')
-        response.write(fs.readFileSync('./a.js'))
+        response.write(fs.readFileSync('./lyw.js'))
         response.end()
     } else if (path === '/data.json') {
         response.statusCode = 200
         response.setHeader('Content-Type', 'text/json;charset=utf-8')
+        response.setHeader('Access-Control-Allow-Origin', 'http://llq.com:9000') // 设置 CORS 允许跨域
         response.write(fs.readFileSync('./data.json'))
         response.end()
     } else {
